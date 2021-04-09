@@ -10,7 +10,7 @@
 
 [Hyperparameters](#Hyperparameters)
 
-[Rewards](#Rewards)
+[Results](#Results)
 
 [Future Work](#Future_Work)  
 
@@ -85,56 +85,43 @@ The ReplayBuffer class consists of Fixed-size buffer to store experience tuples 
 - len(), which returns the current size of internal memory
 
       
-The Navigation.ipynb: This Jupyter notebooks allows to train the agent. More in details it allows to :
-  - Import the Necessary Packages 
-  - Examine the State and Action Spaces
-  - Take Random Actions in the Environment (No display)
-  - Train an agent using DQN
-  - Plot the scores
+The Navigation.ipynb is the Jupyter notebook where I trained the agent. These are the steps taken in it:
+  - Importing the necessary packages 
+  - Examining the State and Action Spaces
+  - Testing random actions in the Environment
+  - Training a DQN agent
+  - Ploting the training scores 
 
-### DQN parameters and results
+**DQN parameters and results**
 
 The DQN agent uses the following parameters values (defined in dqn_agent.py)
 
 ```
 BUFFER_SIZE = int(1e5)  # replay buffer size
-BATCH_SIZE = 64         # minibatch size 
-GAMMA = 0.995           # discount factor 
+BATCH_SIZE = 64         # minibatch size
+GAMMA = 0.99            # discount factor
+LR = 5e-4               # learning rate
 TAU = 1e-3              # for soft update of target parameters
-LR = 5e-4               # learning rate 
 UPDATE_EVERY = 4        # how often to update the network
 ```
 
-The Neural Networks use the following architecture :
-
-```
-Input nodes (37) -> Fully Connected Layer (1024 nodes, Relu activation) -> Fully Connected Layer (1024 nodes, Relu activation) -> Ouput nodes (4)
-```
-
-The Neural Networks use the Adam optimizer with a learning rate LR=5e-4 and are trained using a BATCH_SIZE=64
-
-Given the chosen architecture and parameters, our results are :
+The results have been like this:
 
 <a name="Hyperparameters"></a>
 ## Hyperparameters:
-* Buffer Size = 100000
-* Batch Size = 64
-* Discount Factor (GAMMA)  = 0.999
-* TAU (for soft update of target parameters) = 0.001
-* Learning Rate = 0.0005
-* Update Network every 4 step
+* BUFFER_SIZE = int(1e5)  # replay buffer size
+* BATCH_SIZE = 64         # minibatch size
+* GAMMA = 0.99            # discount factor
+* LR = 5e-4               # learning rate
+* TAU = 1e-3              # for soft update of target parameters
+* UPDATE_EVERY = 4        # how often to update the network
 
-<a name="Rewards"></a>
-## Rewards
-We have trained the Agent using the DQN, as input we have used the vector of state instead of an image so convolutional neural network is replaced with the next layers:
+<a name="Results"></a>
+## Results
 
-Fully connected layer - input: 37 (state size) output: 128
-Fully connected layer - input: 128 output 64
-Fully connected layer - input: 64 output: (action size)
+Here is the evolution of the score per episodes:
 
-We can observe the evolution of the reward along of the episodes. Below is the graphic:
-
-![Rewards](./images/reward_762.png)
+![Results](./images/rewards.png)
 
 <a name="Future_Work"></a>
 ## Future Work
