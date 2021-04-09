@@ -92,21 +92,6 @@ The Navigation.ipynb is the Jupyter notebook where I trained the agent. These ar
   - Training a DQN agent
   - Ploting the training scores 
 
-**DQN parameters and results**
-
-The DQN agent uses the following parameters values (defined in dqn_agent.py)
-
-```
-BUFFER_SIZE = int(1e5)  # replay buffer size
-BATCH_SIZE = 64         # minibatch size
-GAMMA = 0.99            # discount factor
-LR = 5e-4               # learning rate
-TAU = 1e-3              # for soft update of target parameters
-UPDATE_EVERY = 4        # how often to update the network
-```
-
-The results have been like this:
-
 <a name="Hyperparameters"></a>
 ## Hyperparameters:
 * BUFFER_SIZE = int(1e5)  # replay buffer size
@@ -125,18 +110,24 @@ Here is the evolution of the score per episodes:
 
 <a name="Future_Work"></a>
 ## Future Work
-Reinforcement Learning has proven its worth in approximating real-world environments. It can help solve many problems that and with the combination of deep learning and RL, we’re much closer to solving these problems. We have thought in the next steps to improve our algorithm:
 
-  1. Try with another hyperparameters
+Here are some ideas on further developments of the algorithm, beyond simply playing around with the presented architecture and hyperparameters tuning.
 
-  2. Train the double deep Q Network
+An alternative way to train the agent can be about learning directly from the environment's observed pixels. This can be done by modifying the neural network architecture by using [Convolutional Neural Networks](https://en.wikipedia.org/wiki/Convolutional_neural_network) layers to process the raw pixels corresponding to the agent's first-person view of the environment.
 
-  3. Train the dueling deep Q Network
+There are also other several different methods that can improve the DQN agent's learning and performance:
 
-  4. Develop an algorithm to learn from pixels
+- [Double DQN](https://arxiv.org/abs/1509.06461)
+> The popular Q-learning algorithm is known to overestimate action values under certain conditions. It was not previously known whether, in practice, such overestimations are common, whether they harm performance, and whether they can generally be prevented. In this paper, we answer all these questions affirmatively. In particular, we first show that the recent DQN algorithm, which combines Q-learning with a deep neural network, suffers from substantial overestimations in some games in the Atari 2600 domain. We then show that the idea behind the Double Q-learning algorithm, which was introduced in a tabular setting, can be generalized to work with large-scale function approximation. We propose a specific adaptation to the DQN algorithm and show that the resulting algorithm not only reduces the observed overestimations, as hypothesized, but that this also leads to much better performance on several games.
 
-Future applications of reinforcement learning include some of the following tasks:
+- [Dueling DQN](https://arxiv.org/abs/1511.06581)
+> In recent years there have been many successes of using deep representations in reinforcement learning. Still, many of these applications use conventional architectures, such as convolutional networks, LSTMs, or auto-encoders. In this paper, we present a new neural network architecture for model-free reinforcement learning. Our dueling network represents two separate estimators: one for the state value function and one for the state-dependent action advantage function. The main benefit of this factoring is to generalize learning across actions without imposing any change to the underlying reinforcement learning algorithm. Our results show that this architecture leads to better policy evaluation in the presence of many similar-valued actions. Moreover, the dueling architecture enables our RL agent to outperform the state-of-the-art on the Atari 2600 domain.
 
-* A Distributional Perspective on Reinforcement Learning [arxiv](https://arxiv.org/pdf/1707.06887.pdf)
-* Rainbow: Combining Improvements in Deep Reinforcement Learning [arxiv](https://arxiv.org/abs/1710.02298)
-* Hierarchical Deep Reinforcement Learning [arxiv](https://arxiv.org/abs/1604.06057)
+- [Prioritized experience replay](https://arxiv.org/abs/1511.05952)
+> Experience replay lets online reinforcement learning agents remember and reuse experiences from the past. In prior work, experience transitions were uniformly sampled from a replay memory. However, this approach simply replays transitions at the same frequency that they were originally experienced, regardless of their significance. In this paper we develop a framework for prioritizing experience, so as to replay important transitions more frequently, and therefore learn more efficiently. We use prioritized experience replay in Deep Q-Networks (DQN), a reinforcement learning algorithm that achieved human-level performance across many Atari games. DQN with prioritized experience replay achieves a new state-of-the-art, outperforming DQN with uniform replay on 41 out of 49 games.
+
+- [A Distributional Perspective on Reinforcement Learning](https://arxiv.org/abs/1707.06887)
+> In this paper we argue for the fundamental importance of the value distribution: the distribution of the random return received by a reinforcement learning agent. This is in contrast to the common approach to reinforcement learning which models the expectation of this return, or value. Although there is an established body of literature studying the value distribution, thus far it has always been used for a specific purpose such as implementing risk-aware behaviour. We begin with theoretical results in both the policy evaluation and control settings, exposing a significant distributional instability in the latter. We then use the distributional perspective to design a new algorithm which applies Bellman's equation to the learning of approximate value distributions. We evaluate our algorithm using the suite of games from the Arcade Learning Environment. We obtain both state-of-the-art results and anecdotal evidence demonstrating the importance of the value distribution in approximate reinforcement learning. Finally, we combine theoretical and empirical evidence to highlight the ways in which the value distribution impacts learning in the approximate setting.
+
+- [Rainbow: Combining Improvements in Deep Reinforcement Learning](https://arxiv.org/abs/1710.02298)
+> The deep reinforcement learning community has made several independent improvements to the DQN algorithm. However, it is unclear which of these extensions are complementary and can be fruitfully combined. This paper examines six extensions to the DQN algorithm and empirically studies their combination. Our experiments show that the combination provides state-of-the-art performance on the Atari 2600 benchmark, both in terms of data efficiency and final performance. We also provide results from a detailed ablation study that shows the contribution of each component to overall performance.
