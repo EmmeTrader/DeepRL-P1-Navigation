@@ -1,6 +1,6 @@
 [//]: # (Image References)
 
-[image1]: https://user-images.githubusercontent.com/10624937/42135619-d90f2f28-7d12-11e8-8823-82b970a54d7e.gif "Trained Agent"
+[image1]: https://github.com/EmmeTrader/DeepRL-P1-Navigation/blob/main/images/banana.gif "banana"
 
 # Project 1: Navigation
 
@@ -8,7 +8,7 @@
 
 For this project, you will train an agent to navigate (and collect bananas!) in a large, square world.  
 
-![Trained Agent](./images/trained.gif)
+![Trained Agent](./images/banana.gif)
 
 Below is the evolution of the reward function along the episodes.
 
