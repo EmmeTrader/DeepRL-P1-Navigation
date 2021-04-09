@@ -4,9 +4,9 @@
 
 ## Table of Contents  
 
-[Environment details](#Environment details)
+[Environment details](#Environment_details)
 
-[Algorithm](#First)
+[Algorithm](#Algorithm)
 
 [Hyperparameters](#Hyperparameters)
 
@@ -14,6 +14,7 @@
 
 [Future Work](#Future_Work)  
 
+<a name="Environment_details"></a>
 ## Environment details
 
 The environment is based on [Unity ML-agents](https://github.com/Unity-Technologies/ml-agents)
@@ -35,7 +36,7 @@ Given this information, the agent has to learn how to best select actions. Four 
 
 The task is episodic, and **in order to solve the environment, the agent must get an average score of +13 over 100 consecutive episodes.**
 
-<a name="First"></a>
+<a name="Algorithm"></a>
 ## Algorithm
 
 The deployed solution implements a *Value Based* method called [Deep Q-Networks](https://deepmind.com/research/dqn/). 
