@@ -52,7 +52,7 @@ Inspired by the work of [Deepmind](https://deepmind.com), as described in their 
 
 Experience replay improves learning through repetition and past experience. By doing multiple passes over the data, the RL agent has multiple opportunities to learn from a single experience tuple. Each experience is stored in a replay buffer as the agent interacts with the environment. The replay buffer contains a collection of experience tuples with the state, action, reward, and next state `(s, a, r, s')`. Sampling from this buffer is part of the agent's learning step. Experiences are sampled randomly, so that the data correlation is potentially reduced and avoided. This allows action values to not oscillate or diverge dramatically, otherwise a basic Q-learning agent could become biased by correlations between sequential experience tuples.
 
-The fixed Q-targets solution was introduced by the DeepMind team. Using two DQNs instead of one, this method keeps the target values of one network (called the target network) fixed and periodically updates the network weights. 
+The Fixed Q Targets solution was introduced by the DeepMind team. Using two DQNs instead of one, this method keeps the target values of one network (called the target network) fixed and periodically updates the network weights. 
 
 **Code implementation**
 
@@ -71,29 +71,21 @@ QNetwork(
 The inputs are the 37 state variables from the Unity environment and the final output is 4 like the action space size.
 
 The **dqn_agent.py** file contains the DQN class Agent and the class ReplayBuffer.
-The DQN class Agent contains 5 methods:
--constructor, which initializes the memory buffer and two instances of the deep NN (target and local)
--step(), which allows to store a step taken by the RL agent (state, action, reward, next_state, done) in the Replay Buffer/Memory. Every four steps, it updates the target NN weights
 
-- model.py : In this python file, a PyTorch QNetwork class is implemented. This is a regular fully connected Deep Neural Network using the [PyTorch Framework](https://pytorch.org/docs/0.4.0/). This network will be trained to predict the action to perform depending on the environment observed states. This Neural Network is used by the DQN agent and is composed of :
-  - the input layer which size depends of the state_size parameter passed in the constructor
-  - 2 hidden fully connected layers of 1024 cells each
-  - the output layer which size depends of the action_size parameter passed in the constructor
-- dqn_agent.py : In this python file, a DQN agent and a Replay Buffer memory used by the DQN agent) are defined.
-  - The DQN agent class is implemented, as described in the Deep Q-Learning algorithm. It provides several methods :
-    - constructor : 
-      - Initialize the memory buffer (*Replay Buffer*)
-      - Initialize 2 instance of the Neural Network : the *target* network and the *local* network
-    - step() : 
-      - Allows to store a step taken by the agent (state, action, reward, next_state, done) in the Replay Buffer/Memory
-      - Every 4 steps (and if their are enough samples available in the Replay Buffer), update the *target* network weights with the current weight values from the *local* network (That's part of the Fixed Q Targets technique)
-    - act() which returns actions for the given state as per current policy (Note : The action selection use an Epsilon-greedy selection so that to balance between *exploration* and *exploitation* for the Q Learning)
-    - learn() which update the Neural Network value parameters using given batch of experiences from the Replay Buffer. 
-    - soft_update() is called by learn() to softly updates the value from the *target* Neural Network from the *local* network weights (That's part of the Fixed Q Targets technique)
-  - The ReplayBuffer class implements a fixed-size buffer to store experience tuples  (state, action, reward, next_state, done) 
-    - add() allows to add an experience step to the memory
-    - sample() allows to randomly sample a batch of experience steps for the learning       
-- DQN_Banana_Navigation.ipynb : This Jupyter notebooks allows to train the agent. More in details it allows to :
+The DQN class Agent contains 5 methods:
+- constructor, which initializes the memory buffer and two instances of the deep NN (target and local)
+- step(), which allows to store a step taken by the RL agent (state, action, reward, next_state, done) in the Replay Buffer/Memory. Every four steps, it updates the target NN weights  with the current weight values from the local NN (Fixed Q Targets technique)
+- act(), which returns actions for given state as per current policy through an Epsilon-greedy selection in order to balance exploration and exploitation in the Q Learning process
+- learn(), which updates value parameters using given batch of experience tuples in the form of (state, action, reward, next_state, done) 
+- soft_update(), which is used by the learn() method to softly updates the target NN weights from the local NN weights
+
+The ReplayBuffer class consists of Fixed-size buffer to store experience tuples (state, action, reward, next_state, done)  and contains these methods:
+- add(), which adds a new experience tuple to memory
+- sample(), which randomly sample a batch of experiences from memory for the learning process of the agent
+- len(), which returns the current size of internal memory
+
+      
+The Navigation.ipynb: This Jupyter notebooks allows to train the agent. More in details it allows to :
   - Import the Necessary Packages 
   - Examine the State and Action Spaces
   - Take Random Actions in the Environment (No display)
