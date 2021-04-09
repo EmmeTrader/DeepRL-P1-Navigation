@@ -8,7 +8,7 @@
 
 For this project, you will train an agent to navigate (and collect bananas!) in a large, square world.  
 
-![Trained Agent](./images/trained.gif)
+![Trained Agent](./images/banana.gif)
 
 Below is the evolution of the reward function along the episodes.
 
