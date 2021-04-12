@@ -109,6 +109,8 @@ Here is the evolution of the score per episodes:
 
 ![Results](./images/rewards.png)
 
+At the episode 464 the average score reached +13.00.
+
 <a name="Future_Work"></a>
 ## Future Work
 
